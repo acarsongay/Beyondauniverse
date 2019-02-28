@@ -173,8 +173,8 @@ function output( placeholder_json ) {
  *
  */
 function get_json( placeholder_json ) {
-	$.getJSON( placeholder_json.get_json_file_name, function( json ) {
-	  return { ...global_json, ...placeholder_json }; 
+	$.getJSON( placeholder_json.get_json_file_name, function( placeholder_json ) {
+	  return { ...json, ...placeholder_json }; 
 	});
 }
 
