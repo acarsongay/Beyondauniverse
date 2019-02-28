@@ -1,4 +1,76 @@
+/*
+ *
+ */
+var json = {
+	"callback": {
+		"type":"function",
+		"eval":"",
+		"default":"rotation",
+	},
+	"rotation": {
+		"type":"label",
+		"eval":""
+	},
+	"default": {
+		"type":"function",
+		"eval":""
+	},
+	"override_me":"test2",
+	"header_one":{
+		"type":"html_element",
+		"id":"header_one",
+		"element":"h1",
+		"text":"Beyondauniverse"
+	},
+	"loading_template": {
+		"type":"html_element",
+		"id":"loading_template",
+		"element":"div",
+		"text":"Loading"
+	},
+	"a_scene": {
+		"type":"aframe_element",
+		"element":"a_scene",
+		"inner_html": {
+			"type":"html_structure",
+			"a_box":{
+				"type":"aframe_element",
+				"element":"a_box",
+				"position":"-1 0.5 -3",
+				"color":"#FFFFFF",
+				"rotation":"0 50 0 "
+			},
+			"a_sky":{
+				"type":"aframe_element",
+				"element":"a_sky",
+				"color":"#FFAAFF"
+			}
+		}
+	},
+	"base_types": "base_types.json"
+	"types": "types.json",
+	"required": {
+		"*": {
+			"type": {
+				"type":"machine"
+			}
+		}	
+	},
+	"rules": {
+		"html_elements": {
+			
+		}
+	},
+	"validation": {
+		"range": {
+			"eval":""
+		}
+	}
+};
 
+/*
+ *
+ */
 function default_constructor( placeholder_json ) {
 	return {
 		"template": $('#template').html(),
@@ -11,10 +83,24 @@ function default_constructor( placeholder_json ) {
 		...placeholder_json
 	};
 }
+
+/*
+ *
+ */
 function evaluate_json( placeholder_json ) {
 	
 }
 
+/*
+ *
+ */
+function string_replace( placeholder_json ) {
+	return String( json_stringify( placeholder_json ) ).replace( placeholder_json.replace_search_value , placeholder_json.replace_new_value );
+}
+
+/*
+ *
+ */
 function parse_flat_json_string( json_string ) {
     return String(json_string)
             .replace(/&/g, 'ampersand_ampersand_abbriviation_semicolon')
@@ -92,95 +178,6 @@ function get_json( placeholder_json ) {
 	});
 }
 
-/*
- *
- */
-var json = {
-	"callback": {
-		"type":"function",
-		"eval":"",
-		"default":"rotation",
-	},
-	"rotation": {
-		"type":"label",
-		"eval":""
-	},
-	"default": {
-		"type":"function",
-		"eval":""
-	},
-	"override_me":"test2",
-	"header_one":{
-		"type":"html_element",
-		"id":"header_one",
-		"element":"h1",
-		"text":"Beyondauniverse"
-	},
-	"loading_template": {
-		"type":"html_element",
-		"id":"loading_template",
-		"element":"div",
-		"text":"Loading"
-	},
-	"a_scene": {
-		"type":"aframe_element",
-		"element":"a_scene",
-		"inner_html": {
-			"type":"html_structure",
-			"a_box":{
-				"type":"aframe_element",
-				"element":"a_box",
-				"position":"-1 0.5 -3",
-				"color":"#FFFFFF",
-				"rotation":"0 50 0 "
-			},
-			"a_sky":{
-				"type":"aframe_element",
-				"element":"a_sky",
-				"color":"#FFAAFF"
-			}
-		}
-	},
-	"base_types": {
-		"boolean": {
-			"type":"base_type",
-			"default":"false",
-			"extra": {
-				"static_values" : {
-					"type":"extra",
-					"range":"zero_to_one",
-					"zero":"false",
-					"one":"true"
-				}
-			}
-		}
-	},
-	"types": {
-		"html_element": {
-			"eval": ""
-		},
-		"aframe_element": {
-			"extends":"html_element",
-			"eval": ""
-		}
-	},
-	"required": {
-		"*": {
-			"type": {
-				"type":"machine"
-			}
-		}	
-	},
-	"rules": {
-		"html_elements": {
-			
-		}
-	},
-	"validation": {
-		"range": {
-			"eval":""
-		}
-	}
-};
+
 output( json_flatten( default_constructor( json ) ) );
-output( mustache_to_html( json_flatten( default_constructor( json ) ) ) );
+output( mustache_to_html( json_flatten( default_constructor( get_json( "base_types.json" ) ) ) ) );

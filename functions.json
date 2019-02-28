@@ -1,6 +1,20 @@
 {
 	"json_flatten": {
 		"eval":"JSON.flatten( placeholder_json )",
-		"placeholder_json": ""
+		"parameters": {
+			"placeholder_json": {
+				"required":true
+			}
+		}
+	},
+	"string_replace": {
+		"parameters": {
+			"search_value": {
+				"required":true
+			},
+			"new_value": {
+				"required": true
+			}
+		}
 	}
 }

@@ -1,0 +1,36 @@
+{
+	"boolean": {
+		"type":"base_type",
+		"default":"false",
+		"extra": {
+			"static_values" : {
+				"range":"zero_to_one",
+				"zero":"false",
+				"one":"true"
+			}
+		}
+	}
+	"string": {
+	
+	},
+	"number": {
+	
+	},
+	"integer": {
+		"regex":"^[0-9]*$"
+	},
+	"null": {
+	
+	},
+	"undefined": {
+	
+	},
+	"object": {
+	
+	},
+	"symbol": {
+	
+	},
+	"function": {
+	}
+}
