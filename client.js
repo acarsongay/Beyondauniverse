@@ -179,6 +179,5 @@ function get_json( placeholder_json ) {
 }
 
 
-json = json_flatten( default_constructor( get_json( { "get_json_file_name":"base_types.json" } ) ) )
-output( json );
-mustache_to_html( json_flatten( default_constructor( json ) ) ) ;
+output( get_json( { "get_json_file_name":"base_types.json" } ) );
+//mustache_to_html( json_flatten( default_constructor( json ) ) ) ;
