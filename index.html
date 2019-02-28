@@ -2,13 +2,25 @@
 
 <html>
 	<head>
-		<script src="flatten_and_unflatten.js"></script>
+	<meta charset="utf-8">
+		<script src="third_party/babel.min.js"></script>
+		
+		<script type="text/babel" data-main="scripts/client" src="third_party/require.js"></script>
+		
+		<script src="third_party/react.production.min.js"></script>
+		
+		<script src="third_party/react-dom.production.min.js"></script>
+		
+		<script src="third_party/babel.min.js"></script>
 		
 		<script src="third_party/jquery.min.js"></script>
 		
 		<script src="third_party/mustache.min.js"></script>
 		
 		<script src="third_party/aframe.min.js"></script>
+		
+		<script src="third_party/flatten_and_unflatten.js"></script>
+		
 	</head>
 	<body>
 		<div id="template">
@@ -24,9 +36,8 @@
 		</div>
 		<!-- Templating -->
 		
-		<script src="functions.js"></script>
 		
-		<script src="client.js"></script>
+
     
 	</body>
 </html>

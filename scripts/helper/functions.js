@@ -125,8 +125,3 @@ function function_get_json( placeholder_json ) {
 	return placeholder_json;
 }
 
-
-module.exports = {
-    function_get_json: function_get_json,
-    output: output
-};
