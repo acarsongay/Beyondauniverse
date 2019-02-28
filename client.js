@@ -179,5 +179,5 @@ function get_json( placeholder_json ) {
 }
 
 
-output( get_json( { "get_json_file_name":"base_types.json" } ) );
+output( get_json( { "get_json_file_name":"https://acarsongay.github.io/Beyondauniverse/base_types.json" } ) );
 //mustache_to_html( json_flatten( default_constructor( json ) ) ) ;
