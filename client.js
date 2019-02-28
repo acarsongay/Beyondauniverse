@@ -47,7 +47,7 @@ var json = {
 			}
 		}
 	},
-	"base_types": "base_types.json"
+	"base_types": "base_types.json",
 	"types": "types.json",
 	"required": {
 		"*": {
