@@ -1,4 +1,3 @@
-var functions = requirejs("./functions.js");
 
 //console.log( functions.function_get_json( { 
 //	"function_get_json_string_url" : "./story.js",
