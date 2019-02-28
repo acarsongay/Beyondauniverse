@@ -127,5 +127,6 @@ function function_get_json( placeholder_json ) {
 
 module.exports = {
 	function_get_json: function_get_json
+	json_flatten: json_flatten
 };
 
