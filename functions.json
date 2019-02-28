@@ -1,0 +1,6 @@
+{
+	"json_flatten": {
+		"eval":"JSON.flatten( placeholder_json )",
+		"placeholder_json": ""
+	}
+}

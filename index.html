@@ -1,0 +1,31 @@
+<!doctype html>
+
+<html>
+	<head>
+		<script src="flatten_and_unflatten.js"></script>
+		
+		<script src="third_party/jquery.min.js"></script>
+		
+		<script src="third_party/mustache.min.js"></script>
+		
+		
+		<script src="third_party/aframe.min.js"></script>
+	</head>
+	<body>
+		<div id="template">
+			<h1 id="header_one" > {{ header_one_text }} </h1>
+		
+			<div id="loading_template"> {{ loading_template_text }}</div>
+			<a-scene>
+				<a-box 	position="{{ a_scene_inner_html_a_box_position }}" 
+						rotation="{{ a_scene_inner_html_a_box_rotation }}" 
+						color="{{ a_scene_inner_html_a_box_color }}"></a-box>
+			  <a-sky color="{{ a_scene_inner_html_a_sky_color }}"></a-sky>
+			</a-scene>
+		</div>
+		<!-- Templating -->
+		
+		<script src="client.js"></script>
+    
+	</body>
+</html>
