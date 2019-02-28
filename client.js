@@ -173,12 +173,12 @@ function output( placeholder_json ) {
  *
  */
 function get_json( placeholder_json ) {
-	$.getJSON( placeholder_json.get_json_file_name, function( placeholder_json ) {
-	  return { ...json, ...placeholder_json }; 
+	$.getJSON( placeholder_json.get_json_file_name, function( placeholder_json_from_file ) {
+	  return { ...placeholder_json, ...placeholder_json_from_file }; 
 	});
 }
 
-json = { "get_json_file_name":"https://acarsongay.github.io/Beyondauniverse/base_types.json" };
+json = { "get_json_file_name":"https://acarsongay.github.io/Beyondauniverse/base_types.json", json... };
 output( get_json( json ) );
 output( get_json( default_constructor( json ) ) );
 //mustache_to_html( json_flatten( default_constructor( json ) ) ) ;
