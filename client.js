@@ -173,7 +173,7 @@ function output( placeholder_json ) {
  *
  */
 function get_json( placeholder_json ) {
-	$.getJSON( placeholder_json.get_json_file_name, function( placeholder_json_from_file ) {
+	return $.getJSON( placeholder_json.get_json_file_name, function( placeholder_json_from_file ) {
 	  return { ...placeholder_json, ...placeholder_json_from_file }; 
 	});
 }
