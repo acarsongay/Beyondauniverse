@@ -35,8 +35,6 @@ export function jquery_ajax( placeholder_json ) {
 	
 	jquery_ajax_placeholder_json = $.ajax( placeholder_json );
 	jquery_ajax_response_json = jquery_ajax_placeholder_json.responseJSON;
-	console.log("jquery_ajax_response_json");
-	console.log( jquery_ajax_response_json );
 	
 	return { ...jquery_ajax_response_json, ...placeholder_json };
 }

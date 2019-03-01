@@ -1,24 +1,37 @@
 import { launch } from './helper/functions.js';
+export class client {
+    constructor( placeholder_json ) {
+        this.placeholder_json = placeholder_json; //May possible remove
+		this.json = { "placeholder_json": this.placeholder_json };
+    };
 
-var json;
+    static draw(circle, canvas) {
+        // Canvas drawing code
+    };
 
-json = {
-		type: 'GET',
-		url: "base_types.json",
-		dataType: 'json',
-		success: "merge_placeholder_json_with_data",
-		"get_json_string_url":"base_types.json",
-		"get_json_callback_success":"merge_placeholder_json_with_data"
-	};
+    static get json() {
+        return !this.json ? {} : this.json;
+    };
+    static set json( placeholder_json ) {
+		this.json = { ...this.json, ...this.placeholder_json };
+		this.placeholder_json = placeholder_json;
+		this.json.placeholder_json = this.placeholder_json;
+    };
 
-let placeholder_json;
+    launch() {
+        this.json.launch_results = launch( this.json.placeholder_json );
+    };
+	
+	
+	client.prototype.launch = function launch() {
+    if (arguments.length === 0)
+       this.json.launch_results = launch( this.json.placeholder_json );
 
-placeholder_json = {};
+    if (arguments.length === 1 and typeof(arguments[1]) === 'string')
+		this.json.launch_results = launch( this.json.placeholder_json );
+      return findByFullName.apply(this, arguments);
 
-json["launch_results"] = launch( json );
-
-console.log( "Launch Results: " );
-console.log(  json );
-
-
-
+   // by default, search using first and last name
+   return findBySurname.apply(this, arguments);
+  }
+}
