@@ -1,15 +1,24 @@
+import { launch } from './helper/functions.js';
 
-//console.log( functions.function_get_json( { 
-//	"function_get_json_string_url" : "./story.js",
-//	"function_get_json_callback_success" : "function( data ){ console.log( data ) }"
-// } ) );
-requirejs(["helper/functions"], function( functions ) {
-    //This function is called when scripts/helper/util.js is loaded.
-    //If util.js calls define(), then this function is not fired until
-    //util's dependencies have loaded, and the util argument will hold
-    //the module value for "helper/util".
-	console.log( functions.function_get_json( {
-		"function_get_json_string_url":"base_types.json",
-		"function_get_json_callback_success": "functions.json_flatten"
-	}) );
-});
+var json;
+
+json = {
+		type: 'GET',
+		url: "base_types.json",
+		dataType: 'json',
+		success: "merge_placeholder_json_with_data",
+		"get_json_string_url":"base_types.json",
+		"get_json_callback_success":"merge_placeholder_json_with_data"
+	};
+
+let placeholder_json;
+
+placeholder_json = {};
+
+json["launch_results"] = launch( json );
+
+console.log( "Launch Results: " );
+console.log(  json );
+
+
+

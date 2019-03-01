@@ -1,28 +1,14 @@
 {
-	"boolean": {
-		"type":"base_type",
-		"default":"false",
-		"extra": {
-			"static_values" : {
-				"range":"zero_to_one",
-				"zero":"false",
-				"one":"true"
-			}
-		}
-	}
+	"boolean":{
+	
+	},
 	"string": {
 	
 	},
 	"number": {
 	
 	},
-	"integer": {
-		"regex":"^[0-9]*$"
-	},
-	"null": {
-	
-	},
-	"undefined": {
+	"function": {
 	
 	},
 	"object": {
@@ -31,6 +17,7 @@
 	"symbol": {
 	
 	},
-	"function": {
+	"undefined": {
+	
 	}
 }

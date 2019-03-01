@@ -1,5 +1,62 @@
 
+/*
+ *
+ */
+ export function launch( placeholder_json ) {
+	var jquery_ajax_response;
+	var jquery_ajax_response_merge;
+	
+	jquery_ajax_response = jquery_ajax( placeholder_json );
+	console.log("Jquery Ajax Response");
+	console.log(jquery_ajax_response);
+	jquery_ajax_response_merge = jquery_ajax_merge( jquery_ajax_response );
+	console.log("Jquery Ajax Response Merge");
+	console.log(jquery_ajax_response_merge);
+	
+	return jquery_ajax_response_merge;
+ }
+ export function get_json( placeholder_json ) {
+	return { "ajax": $.ajax({
+	 type: 'GET',
+	 placeholder_json: placeholder_json,
+	 url: placeholder_json.get_json_string_url,
+	 dataType: 'json',
+	 success: eval( placeholder_json.get_json_callback_success )
+	}) };
+}
 
+function jquery_ajax_merge( placeholder_json ) {
+	return {  ...placeholder_json.responseJSON , ...placeholder_json };
+}
+	
+export function jquery_ajax( placeholder_json ) {
+	let jquery_ajax_placeholder_json;
+	let jquery_ajax_response_json; 
+	
+	jquery_ajax_placeholder_json = $.ajax( placeholder_json );
+	jquery_ajax_response_json = jquery_ajax_placeholder_json.responseJSON;
+	console.log("jquery_ajax_response_json");
+	console.log( jquery_ajax_response_json );
+	
+	return { ...jquery_ajax_response_json, ...placeholder_json };
+}
+window.get_function_from_string = function(string)
+{
+    var scope = window;
+    var scopeSplit = string.split('.');
+    for (var i = 0; i < scopeSplit.length - 1; i++)
+    {
+        scope = scope[scopeSplit[i]];
+
+        if (scope == undefined) return;
+    }
+
+    return scope[scopeSplit[scopeSplit.length - 1]];
+}
+ export function merge_placeholder_json_with_data( data ) {
+	 return (json = {...json, ...data, ...this.placeholder_json}) ? TRUE : FALSE;
+ }
+	 
 /*
  *
  */
@@ -81,14 +138,16 @@ function mustache_to_html( placeholder_json ) {
 /*
  *
  */
-function output( placeholder_json ) {
+export function output( placeholder_json ) {
 	return placeholder_json && console.log( placeholder_json );
 }
+
+
 
 /*
  *
  */
-function jquery_get_json( placeholder_json ) {
+export function jquery_get_json( placeholder_json ) {
 	JQuery.getJSON( placeholder_json.jquery_get_json_file_name, function( placeholder_json_from_file ) {
 	  return { ...placeholder_json, ...placeholder_json_from_file }; 
 	});
@@ -113,20 +172,24 @@ function getJSONP(url, success) {
     head.appendChild(script);
 }
 
-function function_get_json( placeholder_json ) {
+
+
+
+
+export function function_get_json( placeholder_json ) {
+	console.log( placeholder_json );
 	let get_json_string_url;
 	let get_json_callback_success;
 	
-	get_json_url = placeholder_json.function_get_json_string_url
-	get_json_callback_success = (new Function('return '+ placeholder_json.function_get_json_callback_success)())();
+	get_json_string_url = placeholder_json.function_get_json_string_url
 	
-	placeholder_json["get_json"] = getJSONP( get_json_url, get_json_callback_success );  
+	placeholder_json["get_json"] = getJSONP( get_json_string_url, (new Function('return '+ placeholder_json[placeholder_json.function_get_json_callback_success])())() );  
 	
 	return placeholder_json;
 }
 
-module.exports = {
-	function_get_json: function_get_json,
-	json_flatten: json_flatten
-};
+
+
+
+
 
