@@ -19,7 +19,7 @@ export class client {
     };
 
     launch() {
-        this.json.launch_results = launch( this.json.placeholder_json );
+        this.json["launch_results"] = launch( this.json["placeholder_json"] );
     };
 	
 	
@@ -29,9 +29,5 @@ export class client {
 
     if (arguments.length === 1 and typeof(arguments[1]) === 'string')
 		this.json.launch_results = launch( this.json.placeholder_json );
-      return findByFullName.apply(this, arguments);
-
-   // by default, search using first and last name
-   return findBySurname.apply(this, arguments);
   }
 }
