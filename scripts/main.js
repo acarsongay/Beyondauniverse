@@ -19,4 +19,7 @@ console.log ( user_client.jquery_ajax( ) );
 console.log ( user_client.merge_json_with_jquery_ajax( ) );
 
 console.log ( user_client.json );
+user_client.db.set('user.name', 'typicode').write();
+
+console.log( user_client.db.getState( ) );
 

@@ -1,4 +1,7 @@
 import { launch } from './helper/functions.js';
+import { low } from '../third_party/low.js';
+import { lodash } from '../third_party/lodash.min.js';
+import { LocalStorage } from '../third_party/LocalStorage.min.js';
 
 export class client {
     constructor( placeholder_json ) {
@@ -9,8 +12,13 @@ export class client {
 			"jquery_ajax_success": "jquery_ajax_success",
 			"placeholder_json": this.placeholder_json
 		};
+		this.adapter = new LocalStorage('db');
+		this.db = low(adapter);
     };
 
+	static get db() {
+		return db;
+	}
     static get json() {
         return ( ( !this.json ) ? ( json.error = { ...this.error, ...{} } ) ? ( this.json ) : ( {} ) : ( this.json ) );
     };
