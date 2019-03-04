@@ -1,10 +1,25 @@
 {
 	"base_type": {
-		"type": {
-			"required": true
-		}
+		"required": true
 	},
 	"type": {
-		
+		"default":"string"
+	}
+	"required": {
+		"base_type":"boolean"
+		"type":"parameter"
+		"default": false
+	},
+	"default": {
+		"base_type":"string",
+		"default":""
+	}
+	"string": {
+		"base_type":"string",
+		"default":""
+	},
+	"json": {
+		"base_type":"object",
+		"default": { }
 	}
 }
