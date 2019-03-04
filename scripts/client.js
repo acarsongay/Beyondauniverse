@@ -1,7 +1,11 @@
 import { launch } from './helper/functions.js';
+
 import { low } from '../third_party/low.js';
 import { lodash } from '../third_party/lodash.min.js';
 import { LocalStorage } from '../third_party/LocalStorage.min.js';
+
+import { string_json } from './types/string_json.js';
+
 
 export class client {
     constructor( placeholder_json ) {
@@ -18,6 +22,12 @@ export class client {
 
 	static get db() {
 		return db;
+		this.string_json = new string_json( "" );
+		
+    };
+
+	static get string_json () {
+		return this.string_json;
 	}
     static get json() {
         return ( ( !this.json ) ? ( json.error = { ...this.error, ...{} } ) ? ( this.json ) : ( {} ) : ( this.json ) );
@@ -28,6 +38,10 @@ export class client {
 		this.placeholder_json = placeholder_json;
 		this.json.placeholder_json = this.placeholder_json;
 		this.json.merge_json_with = merge_json_with;
+    };
+
+    launch() {
+        this.json["launch_results"] = launch( this.json["placeholder_json"] );
     };
 	jquery_ajax( ) {
 		return ( this.json.jquery_ajax = $.ajax(
@@ -60,7 +74,6 @@ export class client {
 	merge_json_and_placeholder_json( ) {
 		return ( this.json = { ...this.json, ...this.placeholder_json } ) ? this.json : this.error ;
 	};
-	
 	json_stringify( ) {
 		return JSON.stringify( this.json ) ;
 	}

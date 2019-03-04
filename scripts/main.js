@@ -23,3 +23,5 @@ user_client.db.set('user.name', 'typicode').write();
 
 console.log( user_client.db.getState( ) );
 
+console.log ( user_client.string_json );
+
