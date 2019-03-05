@@ -1,45 +1,204 @@
 import { launch } from './helper/functions.js';
 
-import { low } from '../third_party/low.js';
-import { lodash } from '../third_party/lodash.min.js';
-import { LocalStorage } from '../third_party/LocalStorage.min.js';
-
 import { string_json } from './types/string_json.js';
 
 
 export class client {
     constructor( placeholder_json ) {
-		
 		this.error = {};
-        this.placeholder_json = placeholder_json; //May possible remove
+        this.placeholder_json = placeholder_json.placeholder_json; //May possible remove
 		this.json = { 
-			"jquery_ajax_success": "jquery_ajax_success",
-			"placeholder_json": this.placeholder_json
+			...placeholder_json,
+			...{
+				"placeholder_json": this.placeholder_json,
+				"jquery_ajax_success": "jquery_ajax_success"
+			}
 		};
-		this.adapter = new LocalStorage('db');
-		this.db = low(adapter);
+		this.db = new PouchDB('database');
+		this.memory = new PouchDB('memory', {adapter:"memory"});
+		//this.localstorage = new PouchDB('localstorage', {adapter: 'localstorage'});
     };
 
+
+	/*
+	 * 
+	 */
 	static get db() {
-		return db;
-		this.string_json = new string_json( "" );
-		
+		return db;		
     };
+	
+	/*
+	 *
+	 */
+	static get memory() {
+		return memory;
+	};
 
+	/*
+	 *
+	 */
 	static get string_json () {
 		return this.string_json;
 	}
+	
+	/*
+	 *
+	 */
     static get json() {
         return ( ( !this.json ) ? ( json.error = { ...this.error, ...{} } ) ? ( this.json ) : ( {} ) : ( this.json ) );
     };
+	
+	/*
+	 *
+	 */
+	static get placeholder_json() {
+		return this.placeholder_json;
+	}
+	
+	/*
+	 *
+	 */
     static set json( placeholder_json ) {
-		this.error = {};
 		this.json = { ...this.json, ...this.placeholder_json };
-		this.placeholder_json = placeholder_json;
-		this.json.placeholder_json = this.placeholder_json;
-		this.json.merge_json_with = merge_json_with;
     };
+	
+	/*
+	 *
+	 */
+	static set placeholder_json( placeholder_json ) {
+		this.json.placeholder_json = placeholder_json;
+		this.placeholder_json = placeholder_json;
+	}
 
+	/*
+	 *
+	 */
+	async_new_websql_db = async ( placeholder_json ) => {
+		return ( this.db = await new PouchDB('database', {adapter: 'websql'}) ) ? placeholder_json : placeholder_json;
+	}
+	
+	/*
+	 *
+	 */
+	async_show_db = async ( placeholder_json ) => {
+		return await this.db.allDocs(
+					{
+						include_docs: placeholder_json.include_docs, 
+						descending:  placeholder_json.descending
+					}, function(err, document) {
+						return document;
+					}
+				)
+				.then(response => response)
+				.catch(() => 'ERROR');
+	};
+	
+	/*
+	 *
+	 */
+	async_all_dbs = async ( placeholder_json ) => {
+		return await PouchDB.allDbs(function callback(err, response) {
+				if (!err) {
+					return {...this.placeholder_json, ...response};
+				}
+			})
+			.then(response => response)
+			.catch(() => 'ERROR');
+	}
+	
+	
+	/*
+	 *
+	 */
+	async_show_memory = async ( placeholder_json ) => {
+		return await this.memory.allDocs( {
+				include_docs: placeholder_json.include_docs, 
+				descending:  placeholder_json.descending
+			}, function callback(err, response) {
+				if (!err) {
+					console.log( response );
+					console.log( placeholder_json );
+					return {...placeholder_json, ...{"response": response}};
+				}
+			}
+		).then(response => response).catch(() => 'ERROR');
+	};
+	
+	/*
+	 *
+	 */
+	async_add_todo = async ( placeholder_json ) => {
+		return await this.db.put({
+				"type":"todo",
+				_id: eval("'use strict';" + placeholder_json.uuid),
+				title: placeholder_json.add_todo_text,
+				completed: false
+			}, function callback(err, response) {
+				if (!err) {
+					return response;
+				}
+			})
+			.then(response => response)
+			.catch(() => 'ERROR');
+	};
+	
+	/*
+	 *
+	 */
+	async_pouchdb_put = async ( placeholder_json ) => {
+		return await this.pouchdb.put({
+				"type": placeholder_json.type,
+				_id: eval("'use strict';" + placeholder_json.uuid),
+				title: placeholder_json.add_todo_text,
+				completed: false
+			}, function callback(err, response) {
+				if (!err) {
+					return response;
+				}
+			})
+			.then(response => response)
+			.catch(() => 'ERROR');
+	}
+	
+	/*
+	 *
+	 */
+	async_add_todo_in_memory = async ( placeholder_json ) => {
+		return await this.memory.put({
+					"type":"todo",
+					_id: eval("'use strict';" + placeholder_json.uuid),
+					title: placeholder_json.text,
+					completed: false
+				}, function callback(err, response) {
+					if (!err) {
+						console.log( response );
+						console.log( placeholder_json );
+						return {...placeholder_json, ...{"response": response}};
+					}
+					console.log( err );
+					console.log( response );
+						console.log( placeholder_json );
+				})
+			.then(response => response)
+			.catch(() => 'ERROR');;
+	};
+	
+	/*
+	 *
+	 */
+	 async_create_index = async ( placeholder_json ) => {
+		 const response = this.db.createIndex( {
+				"index": {
+					"fields": placeholder_json.fields,
+					"name": placeholder_json.name,
+					"ddoc": placeholder_json.ddoc,
+					"type": placeholder_json.type
+				}
+			})
+			.then(response => response)
+			.catch(() => 'ERROR');
+	 }
+	 
     launch() {
         this.json["launch_results"] = launch( this.json["placeholder_json"] );
     };
