@@ -1,25 +1,23 @@
+/*
+ * File Header
+ */
+ 
 import { client } from './client.js';
 var json;
 
 json =  { 
 	"type":"block",
-	"label": "",
-	"functions": {
-		"new_date":"var date = new Date().toISOString(); date",
-		"uuid":"var uuid = uuidv1(); uuid"
-	},
-	"placeholder_json": {
-		"new_date":"var date = new Date().toISOString(); date",
-		"uuid":"var uuid = uuidv1(); uuid",
-		"text":"TEST", 
-		"include_docs":true,
-		"descending":true
-	},
-	"jquery_ajax_url":"./base_types.json"
+	"block": [ "labels","functions","placeholder_json","jquery_ajax" ],
+	"eval": "jquery_ajax_block",
+	"labels": "labels.json",
+	"functions": "functions.json",
+	"placeholder_json": "placeholder_json.json",
+	"jquery_ajax": "base_types.json"
 }
 
 var user_client = new client( json );
 
+/*
 try {
 	user_client.async_add_todo_in_memory( 
 		user_client.placeholder_json 
@@ -32,6 +30,7 @@ try {
 } catch (err) {
   console.log(err);
 }
+*/
 
 
 

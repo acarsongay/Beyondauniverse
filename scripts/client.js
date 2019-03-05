@@ -1,22 +1,28 @@
+/*
+ * File Header
+ */
+
 import { launch } from './helper/functions.js';
 
 import { string_json } from './types/string_json.js';
 
 
 export class client {
+	
+	/*
+	 * 
+	 */
     constructor( placeholder_json ) {
-		this.error = {};
-        this.placeholder_json = placeholder_json.placeholder_json; //May possible remove
 		this.json = { 
 			...placeholder_json,
 			...{
-				"placeholder_json": this.placeholder_json,
+				"error": null,
+				"pouchdb": "pouchdb",
+				"memory":  "memory",
+				"placeholder_json": placeholder_json,
 				"jquery_ajax_success": "jquery_ajax_success"
 			}
 		};
-		this.db = new PouchDB('database');
-		this.memory = new PouchDB('memory', {adapter:"memory"});
-		//this.localstorage = new PouchDB('localstorage', {adapter: 'localstorage'});
     };
 
 
@@ -24,42 +30,35 @@ export class client {
 	 * 
 	 */
 	static get db() {
-		return db;		
+		return this.json.db;		
     };
 	
 	/*
 	 *
 	 */
 	static get memory() {
-		return memory;
+		return this.json.memory;
 	};
-
-	/*
-	 *
-	 */
-	static get string_json () {
-		return this.string_json;
-	}
 	
 	/*
 	 *
 	 */
     static get json() {
-        return ( ( !this.json ) ? ( json.error = { ...this.error, ...{} } ) ? ( this.json ) : ( {} ) : ( this.json ) );
+        return ( this.json );
     };
 	
 	/*
 	 *
 	 */
 	static get placeholder_json() {
-		return this.placeholder_json;
+		return this.json.placeholder_json;
 	}
 	
 	/*
 	 *
 	 */
     static set json( placeholder_json ) {
-		this.json = { ...this.json, ...this.placeholder_json };
+		this.json = { ...this.json, ...placeholder_json };
     };
 	
 	/*
@@ -82,10 +81,9 @@ export class client {
 	 */
 	async_show_db = async ( placeholder_json ) => {
 		return await this.db.allDocs(
-					{
-						include_docs: placeholder_json.include_docs, 
-						descending:  placeholder_json.descending
-					}, function(err, document) {
+		placeholder_json.async_show_db_all_docs,
+		placeholder_json.async_show_db_function,
+		function(err, document) {
 						return document;
 					}
 				)

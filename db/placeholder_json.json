@@ -1,0 +1,20 @@
+{
+	"_id":null,
+	"type":"json"
+	"text":{
+		"_id":null,
+		"value":"TEST"
+	}, 
+	"async": {
+		"_id":null,
+		"show_db": {
+			"all_docs": {
+				"include_docs":true,
+				"descending":true
+			},
+			"function": " document;" ,
+			"then": "(response => response)",
+			"catch": "() => 'ERROR'";
+		}
+	}
+}

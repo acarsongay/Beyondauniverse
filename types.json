@@ -1,7 +1,0 @@
-"html_element": {
-	"eval": ""
-},
-"aframe_element": {
-	"extends":"html_element",
-	"eval": ""
-}

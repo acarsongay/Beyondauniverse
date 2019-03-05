@@ -1,0 +1,104 @@
+{
+	"block": {
+	
+	},
+	"unique_string": {
+		"base_type":"string"
+	}
+	"uuid": {
+		"type":"unique_string"
+		"required":true,
+		"value":null,
+		"default":"45745c60-7b1a-11e8-9c9c-2d42b21b1a3e",
+	},
+	"eval": {
+		"base_type":"function",
+		"value":"return"
+	}
+	"inherit": {
+		"base_type":"eval",
+		"value":"return",
+		"return":"eval",
+		"eval": {
+			"required":true
+		}
+	},
+	"value": {
+		"required":true,
+		"type": "inherit"
+	}
+	"json": {
+		"base_type":"object"
+	},
+	"string_json": {
+		"base_type":"string"
+	},
+	"element": {
+		"base_type":"string"
+	}
+	"html_element": {
+		"extends":"element"
+	},
+	"aframe_element": {
+		"extends":"html_element"
+	},
+	"database": {
+		"alias":"db"
+	},
+	"db": {
+		"base_type":"object",
+		"db_name":"database"
+	},
+	"pouchdb": {
+		"extends": "database",
+		"value": "new PouchDB( db_name );"
+	},
+	"memory": {
+		"conditional_alias":{
+			"value":"database",
+			"condition": "pouchdb"
+		},
+		"value": "new PouchDB('memory', {adapter:'memory'});"
+	},
+	"type": {
+		"base_type":"string"
+	},
+	"required": {
+		"base_type":"boolean"
+	},
+	"static_bond": {
+		"base_type":"function"
+	},
+	"static": {
+		"base_type":"function"
+	},
+	"party": {
+		"static_bond": {
+			"type":"front"
+			"bonds": [ "first","second","third" ]
+		}
+	}
+	"first_party": {
+	
+	},
+	"second_party": {
+	
+	},
+	"third_party": {
+		"link":"party",
+		"base_type":"function"
+	},
+	"jquery": {
+		"type":"third_party"
+		"delimiter":'.',
+		"value":"$"
+	},
+	"ajax": {
+		"base_type":""
+		"delimiter":'.'
+		"value":"ajax"
+	},
+	"jquery_ajax": {
+		
+	}
+}

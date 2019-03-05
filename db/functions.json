@@ -1,5 +1,6 @@
 {
 	"json_flatten": {
+		"type":"eval_parameters",
 		"eval":"JSON.flatten( placeholder_json )",
 		"parameters": {
 			"placeholder_json": {
@@ -8,6 +9,7 @@
 		}
 	},
 	"string_replace": {
+		"type":"eval_parameters",
 		"parameters": {
 			"search_value": {
 				"required":true
@@ -16,5 +18,13 @@
 				"required": true
 			}
 		}
+	},
+	"new_date": {
+		"type": "eval",
+		"eval": "var date = new Date().toISOString(); date";
+	},
+	"uuid": {
+		"type": "eval",
+		"eval": "var uuid = uuidv1(); uuid";
 	}
 }
