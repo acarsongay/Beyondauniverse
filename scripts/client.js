@@ -197,9 +197,13 @@ export class client {
 			.catch(() => 'ERROR');
 	 }
 	 
-    launch() {
-        this.json["launch_results"] = launch( this.json["placeholder_json"] );
-    };
+	 /*
+	  *
+	  */
+	  launch = async ( placeholder_json ) => {
+		  return (this.json["launch_results"] = launch( this.json["placeholder_json"] ) ? this.json : () => 'ERROR';
+	  };
+	  
 	jquery_ajax( ) {
 		return ( this.json.jquery_ajax = $.ajax(
 		{
