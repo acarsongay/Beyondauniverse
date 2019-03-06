@@ -79,17 +79,25 @@ export class client {
 	/*
 	 *
 	 */
+	 async_new_pouchdb_couchdb = async ( placeholder_json ) => {
+		 return ( this.db = async_await_new_pouch_db_default_url( placeholder_json ) )  ? placeholder_json : placeholder_json;;
+	 }
+	 
+	 /*
+	  *
+	  */
+	  async_await_new_pouch_db_default_url = async ( placeholder_json ) => {
+		  return await new PouchDB('http://localhost:5984/database')
+	  }
+	 
+	
+	/*
+	 *
+	 */
 	async_show_db = async ( placeholder_json ) => {
-		return await this.db.allDocs(
-		placeholder_json.async_show_db_all_docs,
-		placeholder_json.async_show_db_function,
-		function(err, document) {
-						return document;
-					}
-				)
-				.then(response => response)
-				.catch(() => 'ERROR');
-	};
+		return await this.db.allDocs( placeholder_json.async_show_db_all_docs, placeholder_json.async_show_db_function );
+	}
+	
 	
 	/*
 	 *
@@ -180,6 +188,13 @@ export class client {
 			.then(response => response)
 			.catch(() => 'ERROR');;
 	};
+	
+	/* 
+	 *
+	 */
+	async_json_flatten_this = async ( placeholder_json ) => {
+		return await return JSON.flatten( placeholder_json );
+	}
 	
 	/*
 	 *
