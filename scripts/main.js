@@ -11,12 +11,24 @@ json =  {
 	"eval": "jquery_ajax_block",
 	"labels": "labels.json",
 	"functions": "functions.json",
-	"placeholder_json": "placeholder_json.json",
+	"async_show_db_all_docs": {
+				"include_docs":true,
+				"descending":true
+			},
+	"async_show_db_function": " document;",
+	"placeholder_json": {"value":"placeholder_json.json"},
 	"jquery_ajax": "base_types.json"
 }
 
 var user_client = new client( json );
 
+console.log( user_client.json );
+
+try {
+	user_client.async_show_db( user_client.json ).then(  response => console.log( response ) );
+} catch (err) {
+  console.log(err);
+}
 /*
 try {
 	user_client.async_add_todo_in_memory( 

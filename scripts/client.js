@@ -17,7 +17,7 @@ export class client {
 			...placeholder_json,
 			...{
 				"error": null,
-				"pouchdb": "pouchdb",
+				"pouchdb": new PouchDB('http://localhost:5984/pouchdb'),
 				"memory":  "memory",
 				"placeholder_json": placeholder_json,
 				"jquery_ajax_success": "jquery_ajax_success"
@@ -44,7 +44,7 @@ export class client {
 	 *
 	 */
     static get json() {
-        return ( this.json );
+        return this.json;
     };
 	
 	/*
@@ -80,14 +80,14 @@ export class client {
 	 *
 	 */
 	 async_new_pouchdb_couchdb = async ( placeholder_json ) => {
-		 return ( this.db = async_await_new_pouch_db_default_url( placeholder_json ) )  ? placeholder_json : placeholder_json;;
+		 return ( this.db = async_await_new_pouchdb_default_url( placeholder_json ) )  ? placeholder_json : placeholder_json;;
 	 }
 	 
 	 /*
 	  *
 	  */
-	  async_await_new_pouch_db_default_url = async ( placeholder_json ) => {
-		  return await new PouchDB('http://localhost:5984/database')
+	  async_await_new_pouchdb_default_url = async ( placeholder_json ) => {
+		  return await new PouchDB('http://localhost:5984/pouchdb')
 	  }
 	 
 	
@@ -95,7 +95,7 @@ export class client {
 	 *
 	 */
 	async_show_db = async ( placeholder_json ) => {
-		return await this.db.allDocs( placeholder_json.async_show_db_all_docs, placeholder_json.async_show_db_function );
+		return await this.db.allDocs( placeholder_json.async_show_db_all_docs, placeholder_json.async_show_db_function ).then(response => response).catch(() => 'ERROR');
 	}
 	
 	
@@ -193,7 +193,7 @@ export class client {
 	 *
 	 */
 	async_json_flatten_this = async ( placeholder_json ) => {
-		return await return JSON.flatten( placeholder_json );
+		return await JSON.flatten( placeholder_json );
 	}
 	
 	/*
@@ -212,9 +212,13 @@ export class client {
 			.catch(() => 'ERROR');
 	 }
 	 
-    launch() {
-        this.json["launch_results"] = launch( this.json["placeholder_json"] );
-    };
+	 /*
+	  *
+	  */
+	  launch = async ( placeholder_json ) => {
+		  return (this.json["launch_results"] = launch( this.json["placeholder_json"] )) ? this.json : () => 'ERROR';
+	  };
+	  
 	jquery_ajax( ) {
 		return ( this.json.jquery_ajax = $.ajax(
 		{
