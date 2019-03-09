@@ -6,28 +6,33 @@ import { client } from './client.js';
 var json;
 
 json =  { 
+	"error": null,
+	"return_document":function return_document( document ) {
+		return document;
+	},
+	"local_db": new PouchDB('http://localhost:5984/pouchdb'),
+	"memory":  new PouchDB('memory', {adapter: 'memory'}),
+	"placeholder_json": {},
+	"jquery_ajax_success": "jquery_ajax_success",
 	"type":"block",
 	"block": [ "labels","functions","placeholder_json","jquery_ajax" ],
 	"eval": "jquery_ajax_block",
 	"labels": "labels.json",
 	"functions": "functions.json",
 	"async_show_db_all_docs": {
-				"include_docs":true,
-				"descending":true
-			},
-	"async_show_db_function": " document;",
+		"include_docs":true,
+		"descending":true
+	},
+	"async_show_db_function": "function( document) { return document; }",
 	"placeholder_json": {"value":"placeholder_json.json"},
-	"jquery_ajax": "base_types.json"
+	"jquery_ajax": "base_types.json",
+	"callback": "async_show_local_db_with_this_json_then_console_log_response"
 }
 
-var user_client = new client( json );
-
-console.log( user_client.json );
-
 try {
-	user_client.async_show_db( user_client.json ).then(  response => console.log( response ) );
+	new client( json );
 } catch (err) {
-  console.log(err);
+	console.log(err);
 }
 /*
 try {

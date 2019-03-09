@@ -13,16 +13,9 @@ export class client {
 	 * 
 	 */
     constructor( placeholder_json ) {
-		this.json = { 
-			...placeholder_json,
-			...{
-				"error": null,
-				"pouchdb": new PouchDB('http://localhost:5984/pouchdb'),
-				"memory":  "memory",
-				"placeholder_json": placeholder_json,
-				"jquery_ajax_success": "jquery_ajax_success"
-			}
-		};
+		return ( this.json = { ...this.json, ...placeholder_json, ...{ "placeholder_json":placeholder_json } } ) 
+		? new Function("'use strict'; return this." + placeholder_json.callback + "()" ).call( this ) ? this : () => 'ERROR' 
+		: () => 'ERROR';		
     };
 
 
@@ -80,22 +73,56 @@ export class client {
 	 *
 	 */
 	 async_new_pouchdb_couchdb = async ( placeholder_json ) => {
-		 return ( this.db = async_await_new_pouchdb_default_url( placeholder_json ) )  ? placeholder_json : placeholder_json;;
+		 return ( placeholder_json.db = async_await_new_pouchdb_default_url( placeholder_json ) )  ? placeholder_json : placeholder_json;;
 	 }
 	 
 	 /*
 	  *
 	  */
 	  async_await_new_pouchdb_default_url = async ( placeholder_json ) => {
-		  return await new PouchDB('http://localhost:5984/pouchdb')
+		  return await new PouchDB('http://localhost:5984/pouchdb').then(response => response).catch(() => 'ERROR');
 	  }
 	 
-	
+	/*
+	 *
+	 */
+	async_show_local_db = async ( placeholder_json ) => {
+		return (
+			await (
+				placeholder_json.local_db.allDocs( 
+					placeholder_json.async_show_db_all_docs,
+					placeholder_json.return_document 
+				)
+				.then(
+					response => response
+				)
+				.catch(
+					() => 'ERROR'
+				)
+			)
+		);		
+	}
+	async_show_local_db_with_this_json_then_console_log_response  = async ( ) => {
+		return await this.async_show_local_db( this.json ).then( response => console.log( response ) );		
+	}
 	/*
 	 *
 	 */
 	async_show_db = async ( placeholder_json ) => {
-		return await this.db.allDocs( placeholder_json.async_show_db_all_docs, placeholder_json.async_show_db_function ).then(response => response).catch(() => 'ERROR');
+		return (
+			await (
+				placeholder_json.db.allDocs( 
+					placeholder_json.async_show_db_all_docs,
+					placeholder_json.return_document 
+				)
+				.then(
+					response => response
+				)
+				.catch(
+					() => 'ERROR'
+				)
+			)
+		);		
 	}
 	
 	
