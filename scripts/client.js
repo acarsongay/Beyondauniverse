@@ -6,6 +6,24 @@ import { launch } from './helper/functions.js';
 
 import { string_json } from './types/string_json.js';
 
+function glob( placeholder_json ) {
+	console.log(placeholder_json);
+	return new Function("'use strict'; return this." + placeholder_json.callback + "()" ).call( placeholder_json );
+}
+function glob_this( placeholder_json ) {
+	console.log(placeholder_json);
+	return new Function("'use strict'; return this." + placeholder_json.callback + "()" ).call( this );
+}
+
+function double_turn( value ) {
+	return value ? this : () => 'ERROR';
+}
+function question( value, truthy, falsy ) {
+	return question ? truthy : falsy;
+}
+function rocket_error( ) {
+	return () => 'ERROR';
+}
 
 export class client {
 	
@@ -13,9 +31,30 @@ export class client {
 	 * 
 	 */
     constructor( placeholder_json ) {
-		return ( this.json = { ...this.json, ...placeholder_json, ...{ "placeholder_json":placeholder_json } } ) 
-		? new Function("'use strict'; return this." + placeholder_json.callback + "()" ).call( this ) ? this : () => 'ERROR' 
-		: () => 'ERROR';		
+		return question(
+			this.json = { ...this.json, ...placeholder_json, ...{ "placeholder_json":placeholder_json } },
+			question( 
+				glob( placeholder_json ),
+				rocket_error( )	
+			),
+			rocket_error( )	
+		);
+		
+		
+		
+		
+		
+		this.json = { ...this.json, ...placeholder_json, ...{ "placeholder_json":placeholder_json } } 
+		
+		if(this.json) {
+			if(new Function("'use strict'; return this." + placeholder_json.callback + "()" ).call( this )) {
+				return this;
+			} else {
+				return () => 'ERROR'
+			}
+		} else {
+			() => 'ERROR'
+		}
     };
 
 
@@ -102,28 +141,29 @@ export class client {
 			)
 		);		
 	}
-	async_show_local_db_with_this_json_then_console_log_response  = async ( ) => {
-		return await this.async_show_local_db( this.json ).then( response => console.log( response ) );		
+	async_show_local_db_with_this_json_then_console_log_response  = async ( placeholder_json ) => {
+		return await placeholder_json.async_show_local_db( placeholder_json ).then( response => console.log( response ) );		
 	}
+	
+	/*
+	 *
+	 */
+	async_document_rocket_return_await_document = async ( document ) => {
+		return await document;
+	}
+	
+	return_document = function( document ) {
+		return document;
+	}
+	
 	/*
 	 *
 	 */
 	async_show_db = async ( placeholder_json ) => {
-		return (
-			await (
-				placeholder_json.db.allDocs( 
-					placeholder_json.async_show_db_all_docs,
-					placeholder_json.return_document 
-				)
-				.then(
-					response => response
-				)
-				.catch(
-					() => 'ERROR'
-				)
-			)
-		);		
-	}
+		return await placeholder_json.db.allDocs( 
+			placeholder_json.async_show_db_all_docs, 
+			placeholder_json.async_document_rocket_return_await_document );
+	};
 	
 	
 	/*

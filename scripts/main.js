@@ -3,14 +3,24 @@
  */
  
 import { client } from './client.js';
-var json;
 
+var json;
+var async_function_map;
+var string_async_function_map;
+var string_functions;
+var function_map;
+var functions;
+var errors;
+(json = {
+	"local_db": null
+})
+?
 json =  { 
-	"error": null,
-	"return_document":function return_document( document ) {
-		return document;
-	},
+	"default_url":"http://localhost:5984/pouchdb",
+	"error": "null",
+	"return_document":"async_function_return_document",
 	"local_db": new PouchDB('http://localhost:5984/pouchdb'),
+	"browser_db": new PouchDB('browser_db'),
 	"memory":  new PouchDB('memory', {adapter: 'memory'}),
 	"placeholder_json": {},
 	"jquery_ajax_success": "jquery_ajax_success",
@@ -19,78 +29,88 @@ json =  {
 	"eval": "jquery_ajax_block",
 	"labels": "labels.json",
 	"functions": "functions.json",
+	"function_map_default":"async_function_map",
 	"async_show_db_all_docs": {
 		"include_docs":true,
 		"descending":true
 	},
+	"local_db": 
+	( json.local_db = 
+		async (  ) => {
+			return await new PouchDB(json.default_url); //Hm
+		}
+	) ? json.local_db( ) : "ERROR",
 	"async_show_db_function": "function( document) { return document; }",
 	"placeholder_json": {"value":"placeholder_json.json"},
 	"jquery_ajax": "base_types.json",
-	"callback": "async_show_local_db_with_this_json_then_console_log_response"
+	"callback": "async_show_local_db"
+}
+?
+(functions =  {
+	"async_function_new_pouchdb_with_http_localhost_5984_pouchdb":null
+}) &&
+(
+functions = {
+	"function_return_null": function ( ) {
+		return null;
+	},
+	"async_show_local_db": async function( placeholder_json ) {
+		console.log( this );
+		return (
+			await (
+				this.local_db.allDocs( 
+					this.async_show_db_all_docs,
+					this.return_document 
+				)
+				.then(
+					response => response
+				)
+				.catch(
+					() => 'ERROR'
+				)
+			)
+		);		
+	},
+	"show_db":"async_show_db",
+	"async_placeholder_json_rocket_return_await_null": async function( placeholder_json ) {
+		return await null; //Hm
+	},
+	"async_document_rocket_return_document": async ( document ) => {
+		return document;
+	}
+})
+:
+errors = {
+	"null":"function_return_null"
+}
+:
+errors = {
+	"null":"function_return_null"
+};
+
+
+string_async_function_map = "async_placeholder_json_rocket_return_await_null_with_async_function_return_null_from_placehold_json_semicolen_async_document_rocket_return_document_with_async_function_return_document_and_return_document";
+async_function_map = {
+	"async_show_db": {
+		
+	},
+	"async_placeholder_json_rocket_return_await_null": {
+		"with":"async_function_return_null_from_placehold_json"
+	},
+	"async_document_rocket_return_document": {
+		"with":"async_function_return_document",
+		"and":"return_document"
+	}
+};
+function_map = { "type":"function_map", ...json.function_map_default };
+string_functions = {
+	"async":[
+		"async_document_rocket_return_document"
+	]
 }
 
 try {
-	new client( json );
+new client( { ...json, ...functions } );
 } catch (err) {
 	console.log(err);
 }
-/*
-try {
-	user_client.async_add_todo_in_memory( 
-		user_client.placeholder_json 
-	).then( 
-		response => user_client.async_show_memory( response )
-		.then( 
-			response => console.log( response ) 
-		)
-	);
-} catch (err) {
-  console.log(err);
-}
-*/
-
-
-
-
-
-
-
-
-
-
-/*
-console.log ( user_client.json );
-
-console.log ( user_client.merge_json_and_placeholder_json() );
-
-console.log ( user_client.merge_json_with ( {"type":"updated_block"} ) );
-
-console.log ( user_client.merge_json_with_no_override ( {"type":"updated_block_unknown","did":"did"} ) );
-
-console.log ( user_client.json_stringify( ) );
-
-console.log ( user_client.json_flatten( ) );
-
-console.log ( user_client.jquery_ajax( ) );
-
-console.log ( user_client.merge_json_with_jquery_ajax( ) );
-
-console.log ( user_client.json );
-*/
-
-//console.log( user_client.add_todo_in_memory( " Work on client side db"  ) );
-//user_client.show_todos( );
-//user_client.show_todos_in_memory( );
-//user_client.merge_todos_in_memory_with( user_client.db );
-//user_client.show_todos( );
-//user_client.show_todos_in_memory( );
-//console.log ( user_client.string_json );
-
-//console.log( user_client.add_todo_in_memory( " Work on client side db"  ) );
-
-//user_client.add_todo_in_memory(user_client.placeholder_json).then(response => user_client.show_memory( response ) );
-
-//user_client.add_todo(user_client.placeholder_json).then( response => user_client.show_db( response ) );
-
-//user_client.all_dbs( user_client.placeholder_json ).then( response => console.log( response ) );
-//user_client.add_todo("Working on adding todo client side db").then(response => user_client.merge_todos_in_memory_with( response ).then(response => user_client.add_todo( response ) ); );
