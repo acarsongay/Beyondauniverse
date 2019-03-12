@@ -8,6 +8,7 @@ launch = async ( placeholder_json ) => {
 /*
  *
  */
+/*
 jquery_ajax( ) {
 	return ( this.json.jquery_ajax = $.ajax(
 		{
@@ -71,7 +72,7 @@ jquery_ajax__( ) {
 mustache_to_html( ) {
 	return $( this.json.target ).html( Mustache.to_html ( eval ( this.json.template ), this.json_flatten( ) ) );
 }
-
+*/
 
 /*
  *

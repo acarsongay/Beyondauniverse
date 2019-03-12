@@ -2,6 +2,7 @@
  *
  */
 import { base } from './base.js';
+import {pouchdb} from "./pouchdb.js";
 
 /*
  *
@@ -48,6 +49,13 @@ export class async_library extends base {
     async_new_callback = async ( placeholder_json ) => {
         return await new Function("'use strict'; return " + placeholder_json[placeholder_json.callback]).call( placeholder_json )
     };
+
+    /*
+     *
+     */
+    async_await_new_client_with_this_json = async ( ) => await new client ( this.json );
+
+    async_await_new_pouchdb_with_placeholder_json = async ( placeholder_json ) => await new pouchdb( placeholder_json );
 
     /*
      *

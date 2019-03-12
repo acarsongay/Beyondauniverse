@@ -30,6 +30,9 @@ function rocket_error( ) {
 	return () => 'ERROR';
 }
 
+
+
+
 export class client extends base {
 	/*
 	 * Declarations
@@ -52,8 +55,12 @@ export class client extends base {
 			...this.json,
 			...{
 				"async_library":null,
+				"default_async_library":null,
 				"db":null,
-				"pouchdb": null
+				"default_db":null,
+				"pouchdb": null,
+				"default_pouchdb": null,
+				"new_async_library_with_placeholder_json": null
 			}
 		};
 
@@ -63,12 +70,13 @@ export class client extends base {
 		this.json = {
 			...this.json,
 			...{
-				"self": this.json,
-				"async_library": new async_library( placeholder_json ),
-				"pouchdb": new pouchdb( placeholder_json ),
-				"placeholder_json": placeholder_json,
-				"error": this.json.error,
-				"callback": placeholder_json.callback ? placeholder_json.callback : "default_callback"
+				"self" : "async_await_new_client_with_this_json",
+				"async_library" : "new_async_library_with_placeholder_json",
+				"pouchdb" : "async_await_new_pouchdb_with_placeholder_json",
+				"new_async_library_with_placeholder_json":this.new_async_library_with_placeholder_json,
+				"placeholder_json" : placeholder_json,
+				"error" : this.json.error,
+				"callback" : placeholder_json.callback ? placeholder_json.callback : "default_callback"
 			}
 		};
 
@@ -153,5 +161,5 @@ export class client extends base {
 		return this.json.placeholder_json = this.json.delete_json_placeholder_json = delete this.json.placeholder_json && placeholder_json && this.json;
 	}
 
-
+	new_async_library_with_placeholder_json = async ( placeholder_json ) => await new async_library( placeholder_json );
 }
