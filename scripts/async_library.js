@@ -50,6 +50,40 @@ export class async_library extends base {
         return await new Function("'use strict'; return " + placeholder_json[placeholder_json.callback]).call( placeholder_json )
     };
 
+    static map_defaults = async ( placeholder_json ) => {
+        return await Promise.all(Object.keys( placeholder_json ).map(async item => {
+            try{
+                if(placeholder_json.hasOwnProperty( item ) && placeholder_json [ item ] != null ) {
+                    return await (placeholder_json [ item ] = placeholder_json[ placeholder_json [ item ] ]) ? placeholder_json [ item ] : 'ERROR';
+                } else {
+                    return await item;
+                }
+            } catch(e) {
+                // seriously: does that make sense? :
+                return e.toString();
+            }
+        })).then( placeholder_json => {
+            return placeholder_json;
+        })
+    };
+
+    static execute_functions = async ( placeholder_json ) => {
+        return await Promise.all(Object.keys( placeholder_json ).map(async item => {
+            try{
+                if(placeholder_json[ item ].includes("async")) {
+                    return await (placeholder_json [ item ] = eval( placeholder_json[ placeholder_json [ item ] ] ) ) ? item : 'ERROR';
+                } else {
+                    return item;
+                }
+            } catch(e) {
+                // seriously: does that make sense? :
+                return e.toString();
+            }
+        })).then( placeholder_json => {
+            return placeholder_json;
+        })
+    };
+
     /*
      *
      */

@@ -54,13 +54,8 @@ export class client extends base {
 		this.json = {
 			...this.json,
 			...{
-				"async_library":null,
-				"default_async_library":null,
-				"db":null,
-				"default_db":null,
-				"pouchdb": null,
-				"default_pouchdb": null,
-				"new_async_library_with_placeholder_json": null
+				"default_library":null,
+				"default_db":null
 			}
 		};
 
@@ -70,12 +65,13 @@ export class client extends base {
 		this.json = {
 			...this.json,
 			...{
-				"self" : "async_await_new_client_with_this_json",
-				"async_library" : "new_async_library_with_placeholder_json",
+				"self" : { ...this.json.self, ...{ "type":"client" } },
 				"pouchdb" : "async_await_new_pouchdb_with_placeholder_json",
-				"new_async_library_with_placeholder_json":this.new_async_library_with_placeholder_json,
+				"default_library":"async_library",
+				"default_db":"pouchdb",
+				"async_library": "new_async_library_with_placeholder_json",
+				"async_default_self": "this.async_default_self ( this )",
 				"placeholder_json" : placeholder_json,
-				"error" : this.json.error,
 				"callback" : placeholder_json.callback ? placeholder_json.callback : "default_callback"
 			}
 		};
@@ -86,6 +82,17 @@ export class client extends base {
 		this.json = { ...placeholder_json, ...this.json };
 
 		/*
+		 * Export Functions
+		 */
+
+		 this.json = {
+			...{
+				"new_async_library_with_placeholder_json":this.new_async_library_with_placeholder_json
+			},
+		 	...this.json
+
+		 };
+		/*
     	 * Evaluate functions
     	 */
 		this.json = {
@@ -95,13 +102,28 @@ export class client extends base {
 			}
 		};
 
-		
-		//Override merge 
-		// this.json = { ...this.json, ...placeholder_json }
-		
-		return new Function( "'use strict'; return this." + this.json [ this.json.callback ] ).call( this.json ) && this;
+		return {...this.json, ...{"self": { ...this, ...this.json.self } } };
     };
 
+    static has_key_default = async ( placeholder_json ) => {
+		return await Object.keys(placeholder_json).some(function (key) {
+			return /default/.test(key);
+		});
+	};
+
+    static new_client = async ( placeholder_json ) => await new client ( placeholder_json );
+
+    static user_client = async( placeholder_json ) => this.new_client( placeholder_json ).then( placeholder_json => placeholder_json );
+
+    static launch = async ( placeholder_json ) => {
+		try {
+			return this.user_client( placeholder_json ).then( ( placeholder_json => placeholder_json ) );
+		} catch (err) {
+			return err;
+		} finally {
+			console.log( "Not sure when to use this");
+		}
+	};
 	/*
 	 * 
 	 */
