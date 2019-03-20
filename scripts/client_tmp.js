@@ -9,6 +9,26 @@ launch = async ( placeholder_json ) => {
  *
  */
 /*
+function return_new_function_args_use_strict_return_this_placeholder_json_callback_with_placeholder_json( placeholder_json ) {
+	return new Function("'use strict'; return this." + placeholder_json.callback + "()" ).call( placeholder_json );
+}
+function return_new_function_args_use_strict_return_this_placeholder_json_callback_with_this( placeholder_json ) {
+	return new Function("'use strict'; return this." + placeholder_json.callback + "()" ).call( this );
+}
+
+
+function turn( value ) {
+	return value ? this : () => 'ERROR';
+}
+function double_turn( value ) {
+	return turn( value ) ? this : () => 'ERROR';
+}
+function question( value, truthy, falsy ) {
+	return question ? truthy : falsy;
+}
+function rocket_error( ) {
+	return () => 'ERROR';
+}
 jquery_ajax( ) {
 	return ( this.json.jquery_ajax = $.ajax(
 		{

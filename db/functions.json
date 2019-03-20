@@ -2,6 +2,7 @@
 	"json_flatten": {
 		"type":"eval_parameters",
 		"eval":"JSON.flatten( placeholder_json )",
+		"eval_string": "shift_hold_j_s_o_n_dot_flatten_placeholder_json",
 		"parameters": {
 			"placeholder_json": {
 				"required":true

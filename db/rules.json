@@ -2,12 +2,12 @@
 	"json_flatten": {
 		"placeholder_json": {
 			"required":true,
-			"value":"",
+			"value":""
 		},
 		"eval": {
 			"required":true
 		}
-	}
+	},
 	"data": {
 		"value": {
 			"required":true

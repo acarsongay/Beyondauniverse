@@ -1,7 +1,7 @@
 
 import { base } from './base.js';
 
-export class pouchdb extends base {
+class pouchdb extends base {
 	constructor( placeholder_json ) {
 		super( placeholder_json );
 		this.json = {
@@ -29,7 +29,7 @@ export class pouchdb extends base {
 				"browser_db": "new_browser_db_with_default_browser_db_name",
 				"default_browser_db_name": "browser_db"
 			}
-		}
+		};
 		return this;
 	}
 	

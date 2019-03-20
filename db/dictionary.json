@@ -4,10 +4,10 @@
 	},
 	"type": {
 		"default":"string"
-	}
+	},
 	"required": {
-		"base_type":"boolean"
-		"type":"parameter"
+		"base_type":"boolean",
+		"type":"parameter",
 		"default": false
 	},
 	"default": {

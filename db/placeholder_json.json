@@ -1,6 +1,6 @@
 {
 	"_id":null,
-	"type":"json"
+	"type":"json",
 	"text":{
 		"_id":null,
 		"value":"TEST"
@@ -14,7 +14,7 @@
 			},
 			"function": " document;" ,
 			"then": "(response => response)",
-			"catch": "() => 'ERROR'";
+			"catch": "() => 'ERROR'"
 		}
 	}
 }

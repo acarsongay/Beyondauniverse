@@ -2,30 +2,15 @@
  *
  */
 import { base } from './base.js';
-import {pouchdb} from "./pouchdb.js";
-
 /*
  *
  */
-export class async_library extends base {
+export class async_library {
 
     /*
      *
      */
     constructor( placeholder_json ) {
-        /*
-         *
-         */
-        super( placeholder_json );
-
-        /*
-         *
-         */
-        this.json = { ...this.json, ...{ "placeholder_json" : placeholder_json } };
-
-        /*
-         *
-         */
         return this;
     }
 
