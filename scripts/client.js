@@ -3,7 +3,8 @@
  */
 
 import { base } from './base.js';
-import { async_library } from './async_library.js'
+import { library } from './objects/library.js'
+import { pouchdb } from './pouchdb.js'
 
 export class client extends base {
     constructor( placeholder_json ) {
@@ -22,31 +23,25 @@ export class client extends base {
 				"default_db": "pouchdb",
 				"default_library": "async_library"
 			},
+			... {
+				"pouchdb": new pouchdb( {} )
+			},
 			...{
 				"self": ( this )
 			}
-		};
+
+
+
+		}
 	}
 
-	/*
-	 * properties defined as strings with a symbol in front of the variable name will be destroy during the construction phase.
-	 */
-	"#destroy_client" = async ( placeholder_json ) => {
-    	return await Promise.all(
-    		Object.keys( placeholder_json )
-				.map(async key =>
-					await delete placeholder_json [ key ] ) )
-			.then( async response =>
-				await ( placeholder_json.destroyed = response ) ? placeholder_json : () => 'ERROR' );
-	};
 
     static new_client = async ( placeholder_json ) =>  await new this ( placeholder_json );
-
 
 	/*
 	 * 
 	 */
-	static get db() {
+	get db() {
 		return (
 			this.hasOwnProperty("json")  ?
 				this.json.hasOwnProperty("db") ?
@@ -59,7 +54,7 @@ export class client extends base {
 	/*
 	 *
 	 */
-	static get memory() {
+	get memory() {
 		return (
 			this.hasOwnProperty("json")  ?
 				this.json.hasOwnProperty("memory") ?
@@ -72,7 +67,7 @@ export class client extends base {
 	/*
 	 *
 	 */
-    static get json() {
+    get json() {
         return ( this.hasOwnProperty("json") ) ? this.json : () => 'error_this_does_not_have_property_json';
     };
 }
