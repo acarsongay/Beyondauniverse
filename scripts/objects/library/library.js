@@ -1,5 +1,5 @@
-import {base} from "../base.js";
-import {book} from "./book.js";
+import {base} from "../type/base.js";
+import {book} from "./book/book.js";
 import {videotape} from "./videotape.js";
 
 export class library extends base {

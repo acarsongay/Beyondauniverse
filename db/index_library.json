@@ -1,0 +1,17 @@
+{
+  "wildcard": {
+    "default_type": "html_element"
+  },
+  "html": {
+
+  },
+  "doctype": {
+    "default": "html"
+  },
+  "head": {
+
+  },
+  "body": {
+
+  }
+}

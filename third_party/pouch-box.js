@@ -673,7 +673,7 @@ exports.install = function (t) {
 'use strict';
 
 var utils = require('./pouch-utils');
-var wrappers = require('pouchdb-wrappers');
+var wrappers = require('database-wrappers');
 
 function isUntransformable(doc) {
   var isLocal = typeof doc._id === 'string' && utils.isLocalId(doc._id);
@@ -1785,7 +1785,7 @@ exports.toPromise = function (func) {
 
 exports.inherits = require('inherits');
 exports.Promise = Promise;
-exports.extend = require('pouchdb-extend');
+exports.extend = require('database-extend');
 exports.clone = function (obj) {
   return exports.extend(true, {}, obj);
 };
@@ -4221,7 +4221,7 @@ nacl.setPRNG = function(fn) {
 },{"buffer":1,"crypto":1}],48:[function(require,module,exports){
 var permit = require('couch-nacl-permit')
 var box = require('couch-box')
-var Promise = require('pouchdb-promise')
+var Promise = require('database-promise')
 
 var ddoc = {
   _id: '_design/box',

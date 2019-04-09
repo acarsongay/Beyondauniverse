@@ -1,0 +1,19 @@
+{
+  "html": {
+    "doctype": "null",
+    "head": {
+      "meta": {
+        "charset": "utf_eight",
+        "title": "slogan"
+      }
+    },
+    "body": {
+      "h1": "website_under_construction_message",
+      "script": {
+        "type": "module",
+        "src": "scripts_main"
+      }
+    }
+
+  }
+}

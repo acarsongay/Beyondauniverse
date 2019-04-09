@@ -1,7 +1,7 @@
 /*
  *
  */
-import { base } from './base.js';
+import { base } from '../type/base.js';
 /*
  *
  */
@@ -74,7 +74,7 @@ export class async_library {
      */
     async_await_new_client_with_this_json = async ( ) => await new client ( this.json );
 
-    async_await_new_pouchdb_with_placeholder_json = async ( placeholder_json ) => await new pouchdb( placeholder_json );
+    async_await_new_pouchdb_with_placeholder_json = async ( placeholder_json ) => await new database( placeholder_json );
 
     /*
      *
@@ -94,7 +94,7 @@ export class async_library {
      *
      */
     async_await_new_pouchdb_default_url = async ( placeholder_json ) => {
-        return await new PouchDB('http://localhost:5984/pouchdb').then(response => response).catch(() => 'ERROR');
+        return await new PouchDB('http://localhost:5984/database').then(response => response).catch(() => 'ERROR');
     };
 
     async_new_local_db = async ( placeholder_json ) => {

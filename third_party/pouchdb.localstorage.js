@@ -1070,7 +1070,7 @@ exports.debuglog = function(set) {
 
 /**
  * Echos the value of a value. Trys to print the value out
- * in the best way possible given the different types.
+ * in the best way possible given the different type.
  *
  * @param {Object} obj The object to print out.
  * @param {Object} opts Optional options object that alters the output.
@@ -1179,7 +1179,7 @@ function formatValue(ctx, value, recurseTimes) {
     return ret;
   }
 
-  // Primitive types cannot have properties
+  // Primitive type cannot have properties
   var primitive = formatPrimitive(ctx, value);
   if (primitive) {
     return primitive;
@@ -5697,7 +5697,7 @@ util.inherits(Readable, Stream);
 var kProxyEvents = ['error', 'close', 'destroy', 'pause', 'resume'];
 
 function prependListener(emitter, event, fn) {
-  // Sadly this is not cacheable as some libraries bundle their own
+  // Sadly this is not cacheable as some library bundle their own
   // event emitter implementation with them.
   if (typeof emitter.prependListener === 'function') return emitter.prependListener(event, fn);
 
@@ -17283,7 +17283,7 @@ function LocalStoragePouchPlugin (PouchDB) {
 if (typeof PouchDB === 'undefined') {
   guardedConsole('error', 'localstorage adapter plugin error: ' +
     'Cannot find global "PouchDB" object! ' +
-    'Did you remember to include pouchdb.js?');
+    'Did you remember to include database.jss?');
 } else {
   PouchDB.plugin(LocalStoragePouchPlugin);
 }

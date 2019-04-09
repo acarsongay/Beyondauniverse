@@ -2,7 +2,7 @@
 (function (process){
 'use strict';
 
-var Promise = require('pouchdb-promise');
+var Promise = require('database-promise');
 /* istanbul ignore next */
 exports.once = function (fun) {
   var called = false;
@@ -726,7 +726,7 @@ module.exports = function (Pouch) {
   function canIgnore(dbName) {
     return (dbName === ALL_DBS_NAME) ||
       // TODO: get rid of this when we have a real 'onDependentDbRegistered'
-      // event (pouchdb/pouchdb#2438)
+      // event (database/database#2438)
       (dbName.indexOf('-mrview-') !== -1) ||
       // TODO: might be a better way to detect remote DBs
       (/^https?:\/\//.test(dbName));

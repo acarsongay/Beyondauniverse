@@ -1,11 +1,11 @@
 
-import { base } from './base.js';
+import { base } from '../type/base.js';
 
-export class pouchdb extends base {
-	constructor( placeholder_json ) {
+export class database extends base {
+	constructor( placeholder_json = {"this": {"this": {}}}) {
         return {
             ...placeholder_json,
-            ... ( (placeholder_json.hasOwnProperty( 'this' ) && placeholder_json['this'] !== undefined ) ? super( placeholder_json['this'] ) : super( placeholder_json ) ),
+            ... ( (placeholder_json.hasOwnProperty( 'this' ) ) ? super( placeholder_json['this'] ) : super( placeholder_json ) ),
             ...{
                 "host":null,
                 "local_db": null,
@@ -21,7 +21,7 @@ export class pouchdb extends base {
             },
             ... {
                 "default_local_db":"pouchdb",
-                "default_host":"http://localhost:5984/pouchdb"
+                "default_host":"http://localhost:5984/database"
             },
             ...{
                 "self": ( this )
@@ -30,10 +30,10 @@ export class pouchdb extends base {
         };
 	}
     "#destroy_uneeded_keys" = async ( placeholder_json ) => {
-        return await placeholder_json.pouchdb["#destroy_uneeded_keys"]( placeholder_json.regex = /(default|defaults|async|self|this|destroyed|deleted|db)/ ? placeholder_json : () => 'ERROR' );
+        return await placeholder_json.database["#destroy_uneeded_keys"]( placeholder_json.regex = /(default|defaults|async|self|this|destroyed|deleted|db)/ ? placeholder_json : () => 'ERROR' );
     };
 	new_pouch_db_with_default_host = async ( placeholder_json ) => {
-		return await new PouchDB('http://localhost:5984/pouchdb');
+		return await new PouchDB('http://localhost:5984/database');
 	};
 	
 	new_browser_db_with_default_browser_db_name = async ( placeholder_json ) => {

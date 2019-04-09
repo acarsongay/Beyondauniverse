@@ -702,7 +702,7 @@
 	}
 
 	// Utility for detecting if a value is a primitive. A primitive value is a member of one of
-	// the following built-in types: Undefined, Null, Boolean, Number, String, and Symbol;
+	// the following built-in type: Undefined, Null, Boolean, Number, String, and Symbol;
 	function isPrimitive(value) {
 		return value === null || (typeof value !== 'function' && typeof value !== 'object');
 	}

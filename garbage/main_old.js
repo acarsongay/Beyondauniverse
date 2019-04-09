@@ -26,7 +26,7 @@ var json = {
 */
 var json_defaults = { "local_db": null };
 var json_default_overrides = {
-	"default_url":"http://localhost:5984/pouchdb",
+	"default_url":"http://localhost:5984/database",
 	"local_db":async ( placeholder_json ) => {
 		console.log( placeholder_json );
 			return await new PouchDB(placeholder_json.default_url); //Hm
@@ -35,7 +35,7 @@ var json_default_overrides = {
 json_default_overrides = { 
 	"error": "null",
 	"return_document":"async_function_return_document",
-	"local_db": new PouchDB('http://localhost:5984/pouchdb'),
+	"local_db": new PouchDB('http://localhost:5984/database'),
 	"browser_db": new PouchDB('browser_db'),
 	"memory":  new PouchDB('memory', {adapter: 'memory'}),
 	"placeholder_json": {},

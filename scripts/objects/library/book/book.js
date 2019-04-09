@@ -1,4 +1,4 @@
-import {base} from "../base.js";
+import {base} from "../../type/base.js";
 
 export class book extends base {
 
